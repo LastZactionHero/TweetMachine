@@ -69,7 +69,7 @@ func loginCallbackHandler(w http.ResponseWriter, r *http.Request) {
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	consumer := newOauthConsumer()
 
-	callbackURL := "http://localhost.verbalizeit.com:9000/login_callback"
+	callbackURL := fmt.Sprintf("%s/login_callback", os.Getenv("API_HOST"))
 	requestToken, loginURL, _ := consumer.GetRequestTokenAndUrl(callbackURL)
 
 	secretCookie := http.Cookie{Name: "request_token_secret", Value: requestToken.Secret}
